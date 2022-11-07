@@ -1,4 +1,4 @@
-package cote.inflearn;
+package cote.inflearn.dfs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ class Point{
     }
 }
 
-public class Main {
+public class PizzaDelivery {
     private static int n,m,len,answer=Integer.MAX_VALUE;
     private static int[] combi;
     private static List<Point> house;
@@ -44,7 +44,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main main = new Main();
+        PizzaDelivery main = new PizzaDelivery();
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         m = sc.nextInt();
