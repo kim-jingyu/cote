@@ -5,28 +5,28 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-class Time implements Comparable<Time>{
-    int start,end;
+class Time implements Comparable<Time> {
+    int start, end;
 
-    Time(int start,int end){
-        this.start=start;
-        this.end=end;
+    Time(int start, int end) {
+        this.start = start;
+        this.end = end;
     }
 
     @Override
     public int compareTo(Time o) {
-        if(this.end==o.end) return this.start-o.start;
-        else return this.end-o.end;
+        if (this.end == o.end) return this.start - o.start;
+        else return this.end - o.end;
     }
 }
 
 public class ConferenceRoom {
-    public int solution(List<Time> list){
-        int cnt=0;
-        int end=Integer.MIN_VALUE;
+    public int solution(List<Time> list) {
+        int cnt = 0;
+        int end = Integer.MIN_VALUE;
         Collections.sort(list);
-        for(Time time:list){
-            if(time.start>=end){
+        for (Time time : list) {
+            if (time.start >= end) {
                 end = time.end;
                 cnt++;
             }
@@ -34,17 +34,17 @@ public class ConferenceRoom {
         return cnt;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         ConferenceRoom conferenceRoom = new ConferenceRoom();
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 
         List<Time> list = new ArrayList<>();
 
-        for(int i=0;i<n;i++){
+        for (int i = 0; i < n; i++) {
             int start = sc.nextInt();
             int end = sc.nextInt();
-            list.add(new Time(start,end));
+            list.add(new Time(start, end));
         }
 
         System.out.println(conferenceRoom.solution(list));
