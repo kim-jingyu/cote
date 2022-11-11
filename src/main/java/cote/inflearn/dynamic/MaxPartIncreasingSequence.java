@@ -37,7 +37,3 @@ public class MaxPartIncreasingSequence {
         System.out.println(solution(list));
     }
 }
-
-//8
-//        5 3 7 8 6 2 9 4
-//4
