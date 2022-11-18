@@ -10,11 +10,10 @@ public class NO1260 {
     private static int[] ch;
     private static int[][] map;
     public static void dfs(int start){
-        ch[start] = 1;
-        System.out.print(start+" ");
         for(int i=1;i<=nodes;i++){
             if(map[start][i]==1 && ch[i]!=1){
                 ch[i]=1;
+                System.out.print(i+" ");
                 dfs(i);
             }
         }
@@ -52,6 +51,8 @@ public class NO1260 {
             map[node1][node2]=map[node2][node1]=1;
         }
 
+        ch[start] = 1;
+        System.out.print(start+" ");
         dfs(start);
         Arrays.fill(ch,0);
         System.out.println();
