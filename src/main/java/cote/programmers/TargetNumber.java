@@ -1,28 +1,26 @@
 package cote.programmers;
 
-import java.util.Scanner;
-import java.util.logging.Level;
-
 public class TargetNumber {
-    private static int sum = 0;
-    static int answer = 0;
-    private static void dfs(int Level, int[] numbers, int target) {
+    private int answer = 0;
+    private int[] numbers;
+    private int target;
+
+    private void dfs(int Level, int sum) {
         if(Level==numbers.length){
+            System.out.println(sum);
             if (sum == target) {
                 answer++;
             }
-            sum = 0;
         }
         else{
-            for(int i=0;i<2;i++){
-                if(i==0) sum += numbers[Level];
-                if(i==1) sum -= numbers[Level];
-                dfs(Level+1,numbers,target);
-            }
+            dfs(Level + 1, sum + numbers[Level]);
+            dfs(Level + 1, sum - numbers[Level]);
         }
     }
-    public static int solution(int[] numbers,int target){
-        dfs(0, numbers, target);
+    public int solution(int[] numbers,int target){
+        this.numbers = numbers;
+        this.target = target;
+        dfs(0, 0);
         return answer;
     }
 }
