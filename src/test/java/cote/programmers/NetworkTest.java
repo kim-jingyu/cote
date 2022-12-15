@@ -27,9 +27,23 @@ class NetworkTest {
 
         assertThat(network.solution(n,computers)).isEqualTo(1);
     }
+
+    @Test
+    void 테스트케이스3(){
+        int n = 3;
+        int[][] computers = {{1, 0, 1}, {0, 1, 0}, {1, 0, 1}};
+
+        assertThat(network.solution(n, computers)).isEqualTo(2);
+    }
+
+    @Test
+    void 테스트케이스4(){
+        int n = 4;
+        int[][] computers = {{1, 1, 0, 1}, {1, 1, 0, 0}, {0, 0, 1, 1}, {1, 0, 1, 1}};
+
+        assertThat(network.solution(n, computers)).isEqualTo(1);
+    }
 }
 
-//| n | computers | return |
-//        | --- | --- | --- |
-//        | 3 | [[1, 1, 0], [1, 1, 0], [0, 0, 1]] | 2 |
-//        | 3 | [[1, 1, 0], [1, 1, 1], [0, 1, 1]] | 1 |
+//3, [[1, 0, 1], [0, 1, 0], [1, 0, 1]]), 2
+//4, [[1, 1, 0, 1], [1, 1, 0, 0], [0, 0, 1, 1], [1, 0, 1, 1]]), 1
