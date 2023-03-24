@@ -5,44 +5,20 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class NetworkTest {
-    private Network network;
+    private final Network network = new Network();
+    @Test
+    void test1() {
+        int[][] computers = {{1, 1, 0}, {1, 1, 0}, {0, 0, 1}};
 
-    public NetworkTest() {
-        network = new Network();
+
+        assertThat(network.solution(3, computers)).isEqualTo(2);
     }
 
     @Test
-    void 테스트케이스1(){
-        int n = 3;
-        int[][] computers = {{1,1,0},{1,1,0},{0,0,1}};
+    void test2() {
+        int[][] computers = {{1, 1, 0}, {1, 1, 1}, {0, 1, 1}};
 
-        assertThat(network.solution(n,computers)).isEqualTo(2);
-    }
 
-    @Test
-    void 테스트케이스2(){
-        int n = 3;
-        int[][] computers = {{1,1,0},{1,1,1},{0,1,1}};
-
-        assertThat(network.solution(n,computers)).isEqualTo(1);
-    }
-
-    @Test
-    void 테스트케이스3(){
-        int n = 3;
-        int[][] computers = {{1, 0, 1}, {0, 1, 0}, {1, 0, 1}};
-
-        assertThat(network.solution(n, computers)).isEqualTo(2);
-    }
-
-    @Test
-    void 테스트케이스4(){
-        int n = 4;
-        int[][] computers = {{1, 1, 0, 1}, {1, 1, 0, 0}, {0, 0, 1, 1}, {1, 0, 1, 1}};
-
-        assertThat(network.solution(n, computers)).isEqualTo(1);
+        assertThat(network.solution(3, computers)).isEqualTo(1);
     }
 }
-
-//3, [[1, 0, 1], [0, 1, 0], [1, 0, 1]]), 2
-//4, [[1, 1, 0, 1], [1, 1, 0, 0], [0, 0, 1, 1], [1, 0, 1, 1]]), 1

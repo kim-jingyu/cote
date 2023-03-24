@@ -1,37 +1,30 @@
 package cote.programmers;
 
 class Network {
-    private int n;
-    private int[][] computers;
-    private boolean[] visited;
-
-    private void init(int n, int[][] computers) {
-        this.n = n;
-        this.computers = computers;
-    }
-
-    private void dfs(int cur) {
-        visited[cur] = true;
-        for (int next = 0; next < n; next++) {
-            if(cur!=next && computers[cur][next]==1 && !visited[next]){
-                dfs(next);
-            }
-        }
-    }
-
-    public int solution(int n, int[][] computers){
-        init(n, computers);
+    public int solution(int n, int[][] computers) {
         int answer = 0;
-        visited = new boolean[n];
+        boolean[] visited = new boolean[n];
 
         for (int i = 0; i < n; i++) {
-            if(!visited[i]){
-                dfs(i);
+            if (!visited[i]) {
+                dfs(i, visited, computers);
                 answer++;
             }
         }
 
         return answer;
+    }
+
+    private void dfs(int cur, boolean[] visited, int[][] computers) {
+        visited[cur] = true;
+        for (int i = 0; i < visited.length; i++) {
+            if (i == cur) {
+                continue;
+            }
+            if (computers[cur][i] == 1 && !visited[i]) {
+                dfs(i, visited, computers);
+            }
+        }
     }
 }
 
