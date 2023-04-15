@@ -1,36 +1,26 @@
 package cote.programmers;
 
+/**
+ * 2023 KAKAO BLIND RECRUITMENT
+ * 택배 배달과 수거하기
+ */
 public class DeliveryAndPickups {
     public long solution(int cap, int n, int[] deliveries, int[] pickups) {
         long answer = 0;
-        int tempCap = cap;
+        int deliveryValue = 0;
+        int pickupValue = 0;
 
-        while (deliveries[n - 1] == 0) {
-            dfs(n, answer, cap, tempCap, deliveries, pickups);
+        for (int cur = n - 1; cur >= 0; cur--) {
+            deliveryValue += deliveries[cur];
+            pickupValue += pickups[cur];
+
+            while (deliveryValue > 0 || pickupValue > 0) {
+                deliveryValue = deliveryValue - cap;
+                pickupValue = pickupValue - cap;
+                answer += (cur + 1) * 2L;
+            }
         }
 
         return answer;
     }
-
-    private void dfs(int n,long answer, int cap, int tempCap, int[] deliveries, int[] pickups) {
-        while (deliveries[n - 1] == 0) {
-            int count = 0;
-            while (tempCap == 0) {
-                while (deliveries[count] == 0) {
-                    deliveries[count]--;
-                    tempCap--;
-                }
-                count++;
-            }
-            answer = Integer.toUnsignedLong(count * 2);
-            while (tempCap == 2) {
-                while (pickups[count] == 0) {
-                    pickups[count]--;
-                    tempCap++;
-                }
-                count--;
-            }
-        }
-    }
-
 }
