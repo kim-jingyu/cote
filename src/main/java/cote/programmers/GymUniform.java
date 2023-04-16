@@ -11,8 +11,24 @@ public class GymUniform {
         for (int curLost : lost) students[curLost]--;
         for (int curReserve : reserve) students[curReserve]++;
 
+        for (int cur = 1; cur <= n; cur++) {
+            if (students[cur] == 2) {
+                if (cur != 1 && students[cur - 1] == 0) {
+                    students[cur - 1]++;
+                    students[cur]--;
+                } else if (cur != n && students[cur + 1] == 0) {
+                    students[cur + 1]++;
+                    students[cur]--;
+                }
+            }
+        }
 
+        for (int cur = 1; cur <= n; cur++) {
+            if (students[cur] >= 1) {
+                answer++;
+            }
+        }
 
-        return n - answer;
+        return answer;
     }
 }
