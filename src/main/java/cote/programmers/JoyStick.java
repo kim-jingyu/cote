@@ -19,6 +19,9 @@ public class JoyStick {
             }
 
             // 좌우 이동거리 구하기
+            // cur = 오른쪽 이동거리
+            // name - lastPosA = 왼쪽 이동거리
+            // Math.min(cur, nameLen - lastPosA) = 끝에서 해당 숫자까지 이동거리, 오른쪽 이동거리 중 작은 값
             move = Math.min(move, cur + (nameLen - lastPosA) + Math.min(cur, nameLen - lastPosA));
         }
 
