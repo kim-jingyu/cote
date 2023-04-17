@@ -5,38 +5,23 @@ import java.util.Arrays;
 public class JoyStick {
     public int solution(String name) {
         int answer = 0;
-        int[] values = new int[name.length()];
-        Arrays.fill(values, 0);
+        int nameLen = name.length();
+        int move = nameLen - 1;
 
-        int[] params = new int[name.length()];
-        for (int i = 0; i<name.length(); i++) {
-            params[i] = name.charAt(i) - 65;
-        }
+        for (int cur = 0; cur < nameLen; cur++) {
+            // 상하 이동거리 구하기
+            answer += Math.min(name.charAt(cur) - 'A', 'Z' - name.charAt(cur) + 1);
 
-        int pos = 0;
-        for (int cur = 0; cur < name.length(); cur++) {
-            if (values[cur] == params[cur]) continue;
-
-            if (Math.abs(pos - cur) > (name.length() / 2)) {
-                answer += (name.length() - cur);
-                pos = cur;
-                if (Math.abs(values[cur] - params[cur]) > 13) {
-                    answer += Math.abs(params[cur] - 25) + 1;
-                } else {
-                    answer += Math.abs(values[cur] - params[cur]);
-                }
-            }else {
-                answer += (cur - pos);
-                if (Math.abs(values[cur] - params[cur]) > 13) {
-                    answer += Math.abs(params[cur] - 25) + 1;
-                    pos = cur;
-                } else {
-                    answer += Math.abs(values[cur] - params[cur]);
-                    pos = cur;
-                }
+            // A의 마지막 위치
+            int lastPosA = cur + 1;
+            while (lastPosA < nameLen && name.charAt(lastPosA) == 'A') {
+                lastPosA++;
             }
+
+            // 좌우 이동거리 구하기
+            move = Math.min(move, cur + (nameLen - lastPosA) + Math.min(cur, nameLen - lastPosA));
         }
 
-        return answer;
+        return answer + move;
     }
 }
