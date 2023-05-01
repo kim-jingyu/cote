@@ -1,4 +1,4 @@
-# n: 사람수, times[] : 심사관별 검사 시간
+ㅔㄱ# n: 사람수, times[] : 심사관별 검사 시간
 def solution(n, times):
     start = 1
     end = n*max(times)
