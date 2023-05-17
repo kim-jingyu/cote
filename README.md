@@ -4,3 +4,4 @@
 - #### [백준](https://github.com/jingyu9804/cote-exercise/tree/main/src/main/java/cote/baekjoon)
 - #### [인프런](https://github.com/jingyu9804/cote-exercise/tree/main/src/main/java/cote/inflearn)
 - #### [프로그래머스](https://github.com/jingyu9804/cote-exercise/tree/main/src/main/java/cote/programmers)
+- #### [SWEA](https://github.com/kim-jingyu/cote-exercise/tree/main/src/main/java/cote/swea)
