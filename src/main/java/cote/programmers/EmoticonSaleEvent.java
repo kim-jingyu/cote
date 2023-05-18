@@ -1,41 +1,50 @@
 package cote.programmers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 2023 KAKAO BLIND RECRUITMENT
  */
 public class EmoticonSaleEvent {
+    private int emoticonPlus = 0;
+    private int[] userMoney;
     public int[] solution(int[][] users, int[] emoticons) {
         int[] answer = {};
-        // emoticon 별 rate, userMoney, plus 가입자 수
-        ArrayList<List<Integer>> emoticon = new ArrayList<>(emoticons.length);
+        int[] discounts = {10, 20, 30, 40};
+        int[] arr = new int[emoticons.length];  // 할인율 저장 배열
+        userMoney = new int[users.length];
 
-        // 0. users 에서 emoticon 최소 비율 가져오기
-        int minRate = 40;
-        for (int[] user : users) {
-            minRate = Math.min(minRate, user[0]);
+        dfs(0, discounts, users, emoticons, arr);
+
+        for (int i : userMoney) {
+            System.out.println(i);
         }
 
-        // 1. emoticon 별로 비율 배정하기 ( minRate ~ 40 )
-        for (int rate = 40; rate >= minRate; rate--) {
+        System.out.println("emoticonPlus = " + emoticonPlus);
 
-            // emoticons[i] 의 비율이 rate 일 때,
+        return answer;
+    }
+
+    private void dfs(int level, int[] discounts, int[][] users, int[] emoticons, int[] arr) {
+        if (level == emoticons.length) {
+            // arr -> 이모티콘 할인율 모음
+            // arr[i] -> 이모티콘별 할인율
             for (int i = 0; i < emoticons.length; i++) {
-                // 2. rate 가 user 의 rate (user[0]) 보다 크거나같으면
+                // 이모티콘 할인율로 사용자별 최소 할인율과 비교 계산
                 for (int j = 0; j < users.length; j++) {
-                    if (rate >= users[j][0]) {
-                        List<Integer> info = emoticon.get(i);
-                        info.add(rate);
-                        // userMoney = emoticons[0] X rate
-                        info.add(emoticons[i] * (100 - rate) / 100);
-                        info.add(0);
+                    if (users[j][0] < arr[i]) continue;
+                    // 만약 크다면, 사용자별 이모티콘 구매 비용 추가
+                    userMoney[j] += emoticons[i] * (100 - arr[i]) / 100;
+                    // 만약 사용자별 이모티콘 구매 비용이 사용자별 플러스 멤버십 가입 가격보다 크면, 구매 비용 초기화 + 이모티콘 플러스 서비스 가입
+                    if (userMoney[j] > users[j][1]) {
+                        userMoney[j] = 0;
+                        emoticonPlus++;
                     }
                 }
             }
+            return;
         }
-
-        return answer;
+        for (int discount : discounts) {
+            arr[level] = discount;
+            dfs(level + 1, discounts, users, emoticons, arr);
+        }
     }
 }
