@@ -28,7 +28,7 @@ public class MaxPrizeMoney {
         }
         for (int i = 0; i < numbers.length; i++) {
             for (int j = i + 1; j < numbers.length; j++) {
-                exchanging(numbers, i, j);
+                exchange(numbers, i, j);
 
                 String flattenedNumber = getFlattenedNumber(numbers);
 
@@ -37,7 +37,7 @@ public class MaxPrizeMoney {
                     dfs(level+1, numbers, exchange, isVisited);
                 }
 
-                exchanging(numbers, i, j);
+                exchange(numbers, i, j);
             }
         }
     }
@@ -50,7 +50,7 @@ public class MaxPrizeMoney {
         return flattenedNumber;
     }
 
-    private static void exchanging(String[] numbers, int i, int j) {
+    private static void exchange(String[] numbers, int i, int j) {
         String tmp = numbers[i];
         numbers[i] = numbers[j];
         numbers[j] = tmp;
