@@ -9,6 +9,6 @@ class IntergersBetweenTwoCirclesTest {
 
     @Test
     void test1() {
-        assertThat(ic.solution(1, 3)).isEqualTo(28L);
+        assertThat(ic.solution(2, 3)).isEqualTo(20L);
     }
 }
