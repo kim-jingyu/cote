@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-class SumOfContinuedPartialSequenceTest {
-    SumOfContinuedPartialSequence sc = new SumOfContinuedPartialSequence();
+class SumOfContinuedSubSequenceTest {
+    SumOfContinuedSubSequence sc = new SumOfContinuedSubSequence();
 
     @Test
     void test1() {
