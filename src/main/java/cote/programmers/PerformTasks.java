@@ -15,6 +15,18 @@ class PerformTasks{
             this.playtime = playtime;
         }
 
+        public String getName() {
+            return name;
+        }
+
+        public Integer getStart() {
+            return start;
+        }
+
+        public Integer getPlaytime() {
+            return playtime;
+        }
+
         @Override
         public int compareTo(Task o) {
             return this.start - o.start;
@@ -26,7 +38,7 @@ class PerformTasks{
         // 시작시간 기준 오름차순 우선순위 큐
         PriorityQueue<Task> pq = new PriorityQueue<>();
 
-        // 멈춰둔 과제가 여러 개일 경우, 가장 최근에 멈춘 과제부터 시작한다. -> Stack
+        // 잠시 멈춘 과
         Stack<Task> remainingTasks = new Stack<>();
 
         // plans 배열값 큐에 할당
@@ -45,6 +57,23 @@ class PerformTasks{
 
         while (!pq.isEmpty()) {
             Task currentTask = pq.poll();
+
+            String curName = currentTask.name;
+            Integer curStart = currentTask.start;
+            Integer curPlaytime = currentTask.playtime;
+
+            // 새로운 과제를 시작할 시각이 되었을 때, 기존에 진행 중이던 과제가 있다면 진행 중이던 과제를 멈추고 새로운 과제를 시작합니다.
+
+            // 다음 과제가 있으면
+            if (!pq.isEmpty()) {
+                Task nextTask = pq.poll();
+
+                String nextName = nextTask.name;
+                Integer nextStart = nextTask.start;
+                Integer nextPlaytime = nextTask.playtime;
+
+
+            }
 
 
         }
