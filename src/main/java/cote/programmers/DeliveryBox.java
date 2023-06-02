@@ -8,38 +8,28 @@ public class DeliveryBox {
     public int solution(int[] order) {
         int answer = 0;
 
-        boolean[] visited = new boolean[order.length + 1];
+        int deliveryIndex = 0;
+        Stack<Integer> secondBelt = new Stack<>();
 
-        Queue<Integer> queue = new LinkedList<>();
-        for (int o : order) {
-            queue.add(o);
-        }
+        for (int box = 1; box <= order.length; box++) {
 
-        Stack<Integer> stack = new Stack<>();
-
-        while (!queue.isEmpty()) {
-            Integer curOrder = queue.poll();
-
-            if (visited[curOrder - 1]) {
-                answer++;
-                visited[curOrder] = true;
+            // 택배수거순서 != 현재 택배상자
+            if (order[deliveryIndex] != box) {
+                secondBelt.push(box);
                 continue;
             }
 
-            if (stack.isEmpty()) {
-                for (int i = 1; i < curOrder; i++) {
-                    if (visited[i]) continue;
-                    stack.push(i);
-                }
+            // 택배수거순서 == 현재 택배상자
+            deliveryIndex++;
+            answer++;
+
+            // 보조 컨베이어 벨트에서 택배 수거가 가능할때
+            while (!secondBelt.isEmpty() && order[deliveryIndex] == secondBelt.peek()) {
+                secondBelt.pop();
+                deliveryIndex++;
                 answer++;
-            } else {
-                if (stack.pop() == curOrder) answer++;
-                else break;
             }
-
-            visited[curOrder] = true;
         }
-
         return answer;
     }
 }
