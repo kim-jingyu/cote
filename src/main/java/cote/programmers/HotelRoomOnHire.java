@@ -17,8 +17,6 @@ public class HotelRoomOnHire {
         }
     }
     public int solution(String[][] book_time) {
-        int answer = 0;
-
         List<Booking> bookings = new ArrayList<>();
 
         for (String[] strings : book_time) {
@@ -29,34 +27,26 @@ public class HotelRoomOnHire {
 
         Collections.sort(bookings);
 
-        boolean[] visited = new boolean[bookings.size()];
-        int endTime = 24 * 60;
+        PriorityQueue<Integer> rooms = new PriorityQueue<>();
 
         for (int i = 0; i < bookings.size(); i++) {
             Booking curBooking = bookings.get(i);
 
-            if (visited[i]) continue;
-
-
-            // 새로운 객실을 사용해야 하는 경우
-            if (curBooking.start < endTime + 10) {
-                visited[i] = true;
-                answer++;
-                endTime = curBooking.end;
+            if (rooms.isEmpty()) {
+                rooms.add(curBooking.end);
+                continue;
             }
 
-            // 해당 객실에 다음 손님을 받을 수 있는 경우
-            for (int j = i + 1; j < bookings.size(); j++) {
-                Booking nextBooking = bookings.get(j);
-
-                if (nextBooking.start >= endTime + 10){
-                    visited[j] = true;
-                    endTime = nextBooking.end;
-                }
+            int earliestEmptyRoom = rooms.peek();
+            if (curBooking.start >= earliestEmptyRoom + 10) {
+                rooms.poll();
+                rooms.add(curBooking.end);
+            } else {
+                rooms.add(curBooking.end);
             }
         }
 
-        return answer;
+        return rooms.size();
     }
 
     private int getTime(String[] split) {
