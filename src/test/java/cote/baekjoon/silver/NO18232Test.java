@@ -1,12 +1,10 @@
 package cote.baekjoon.silver;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class NO18232Test {
     NO18232 no = new NO18232();
