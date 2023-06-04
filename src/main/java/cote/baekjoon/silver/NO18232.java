@@ -1,8 +1,20 @@
 package cote.baekjoon.silver;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
-public class NO18232 {
+class NO18232 {
+    /**
+     * N: 정거장 개수
+     * M: 텔레포트 정보 개수
+     * S: 출발 위치
+     * E: 도착 위치
+     */
+    static int N,M,S, E;
+    static boolean[] visited;
+
     static class Position{
         int now;
         int level;
@@ -12,63 +24,71 @@ public class NO18232 {
             this.level = level;
         }
     }
-    public static void main(String[] args) {
-        int answer = Integer.MAX_VALUE;
+    public static void main(String[] args) throws IOException {
+        Map<Integer, List<Integer>> teleport = getTeleport();
 
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        int start = sc.nextInt();
-        int end = sc.nextInt();
+        System.out.println(getAnswer(teleport));
+    }
 
-        List<int[]> connections = new ArrayList<>();
-        for (int i = 0; i < m; i++) {
-            int[] connected = new int[2];
-            int port1 = sc.nextInt();
-            int port2 = sc.nextInt();
+    private static Map<Integer, List<Integer>> getTeleport() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
 
-            connected[0] = port1;
-            connected[1] = port2;
+        st = new StringTokenizer(br.readLine());
+        S = Integer.parseInt(st.nextToken());
+        E = Integer.parseInt(st.nextToken());
+
+        Map<Integer, List<Integer>> teleport = new HashMap<>();
+
+        for (int i = 0; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
+
+            int port1 = Integer.parseInt(st.nextToken());
+            int port2 = Integer.parseInt(st.nextToken());
+
+            teleport.computeIfAbsent(port1, k -> new ArrayList<>());
+            teleport.get(port1).add(port2);
+            teleport.computeIfAbsent(port2, k -> new ArrayList<>());
+            teleport.get(port2).add(port1);
         }
 
-        boolean[] visited = new boolean[n];
+        br.close();
+        return teleport;
+    }
 
+    private static int getAnswer(Map<Integer, List<Integer>> teleport) {
+        visited = new boolean[N + 1];
         Queue<Position> queue = new LinkedList<>();
-        queue.add(new Position(start, 0));
+        queue.add(new Position(S, 0));
         while (!queue.isEmpty()) {
             Position position = queue.poll();
             int now = position.now;
 
-            if (visited[now]) continue;
-
-            visited[now] = true;
-            int level = position.level;
-
-            if (now == end) {
-                answer = Math.min(answer, now);
+            if (now == E) {
+                return position.level;
             }
 
-            for (int i = 0; i < m; i++) {
-                int[] connection = connections.get(i);
+            for (int link : getLinks(teleport, now)) {
+                if (visited[link]) continue;
 
-                if (connection[0] == now && !visited[connection[1]]) {
-                    queue.add(new Position(connection[1], level + 1));
-                }
-
-                if (connection[1] == now && !visited[connection[0]]) {
-                    queue.add(new Position(connection[0], level+1));
-                }
+                visited[link] = true;
+                queue.add(new Position(link, position.level + 1));
             }
         }
+
+        return 0;
+    }
+
+    private static List<Integer> getLinks(Map<Integer, List<Integer>> teleport, int now) {
+        List<Integer> links = teleport.getOrDefault(now, new ArrayList<>());
+        if (now - 1 >= 1) {
+            links.add(now - 1);
+        }
+        if (now + 1 <= N) {
+            links.add(now + 1);
+        }
+        return links;
     }
 }
-
-//5 1
-//        1 5
-//        1 4
-//
-//        10 3
-//        2 5
-//        1 6
-//        1 3
-//        2 8
