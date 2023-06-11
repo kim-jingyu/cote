@@ -1,4 +1,4 @@
-package book.ch2.matrixmultiplication;
+package book.ch3.matrixmultiplication;
 
 import org.junit.jupiter.api.Test;
 

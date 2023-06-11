@@ -1,4 +1,4 @@
-package book.ch2.checkingdistancing;
+package book.ch3.checkingdistancing;
 
 class CheckingDistancing {
     // 상, 좌, 우 , 하

@@ -1,4 +1,4 @@
-package book.ch2.trianglesnail;
+package book.ch3.trianglesnail;
 
 public class TriangleSnailV1 {
     private static final int[] dx = {0, 1, -1};

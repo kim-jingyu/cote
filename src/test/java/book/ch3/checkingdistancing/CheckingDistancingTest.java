@@ -1,4 +1,4 @@
-package book.ch2.checkingdistancing;
+package book.ch3.checkingdistancing;
 
 import org.junit.jupiter.api.Test;
 

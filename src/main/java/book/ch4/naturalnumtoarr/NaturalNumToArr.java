@@ -1,4 +1,4 @@
-package book.ch3.naturalnumtoarr;
+package book.ch4.naturalnumtoarr;
 
 public class NaturalNumToArr {
     public int[] solution(long n) {

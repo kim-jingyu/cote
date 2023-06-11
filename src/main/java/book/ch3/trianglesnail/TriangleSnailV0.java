@@ -1,4 +1,4 @@
-package book.ch2.trianglesnail;
+package book.ch3.trianglesnail;
 
 public class TriangleSnailV0 {
     public int[] solution(int n) {

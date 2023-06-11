@@ -1,4 +1,4 @@
-package book.ch2.matrixmultiplication;
+package book.ch3.matrixmultiplication;
 
 public class MatrixMultiplication {
     public int[][] solution(int[][] arr1, int[][] arr2) {

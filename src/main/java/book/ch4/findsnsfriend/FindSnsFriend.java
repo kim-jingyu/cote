@@ -1,4 +1,4 @@
-package book.ch3.findsnsfriend;
+package book.ch4.findsnsfriend;
 
 import java.util.*;
 

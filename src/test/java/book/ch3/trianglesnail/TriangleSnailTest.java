@@ -1,4 +1,4 @@
-package book.ch2.trianglesnail;
+package book.ch3.trianglesnail;
 
 import org.junit.jupiter.api.Test;
 

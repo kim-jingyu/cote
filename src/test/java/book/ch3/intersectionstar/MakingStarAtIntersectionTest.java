@@ -1,4 +1,4 @@
-package book.ch2.intersectionstar;
+package book.ch3.intersectionstar;
 
 import org.junit.jupiter.api.Test;
 
