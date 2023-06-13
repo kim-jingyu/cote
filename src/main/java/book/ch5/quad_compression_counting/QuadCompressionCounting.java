@@ -1,4 +1,4 @@
-package book.ch4.quad_compression_counting;
+package book.ch5.quad_compression_counting;
 
 class QuadCompressionCounting {
     private static class Count {
