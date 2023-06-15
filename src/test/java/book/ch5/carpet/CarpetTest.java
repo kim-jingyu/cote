@@ -1,5 +1,6 @@
 package book.ch5.carpet;
 
+import book.ch6.carpet.Carpet;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;

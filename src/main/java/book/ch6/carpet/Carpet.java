@@ -1,4 +1,4 @@
-package book.ch5.carpet;
+package book.ch6.carpet;
 
 class Carpet {
     public int[] solution(int brown, int yellow) {
