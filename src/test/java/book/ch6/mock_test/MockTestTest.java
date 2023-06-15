@@ -1,4 +1,4 @@
-package book.ch5.mock_test;
+package book.ch6.mock_test;
 
 import book.ch6.mock_test.MockTest;
 import org.junit.jupiter.api.Test;

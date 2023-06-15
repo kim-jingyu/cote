@@ -1,4 +1,4 @@
-package book.ch5.carpet;
+package book.ch6.carpet;
 
 import book.ch6.carpet.Carpet;
 import org.junit.jupiter.api.Test;
