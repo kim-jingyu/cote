@@ -1,115 +1,108 @@
 package book.ch3.intersectionstar;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 class MakingStarAtIntersection {
-    private static class Point {
-        public final long x, y;
+    private static class Point{
+        long x, y;
 
-        private Point(long x, long y) {
+        public Point(long x, long y) {
             this.x = x;
             this.y = y;
         }
     }
 
     public String[] solution(int[][] line) {
-        List<Point> points = getPoints(line);
+        Set<Point> intersections = getIntersections(line);
 
-        // 2. 저장된 정수들 중 최대, 최소값 구하기
-        Point minimumPoint = getMinimumPoint(points);
-        Point maximumPoint = getMaximumPoint(points);
+        Point maxIntersection = getMaxIntersection(intersections);
+        Point minIntersection = getMinIntersection(intersections);
 
-        char[][] arr = getArr(minimumPoint, maximumPoint);
 
-        makeStars(points, minimumPoint, maximumPoint, arr);
+        int width = (int) (maxIntersection.x - minIntersection.x + 1);
+        int height = (int) (maxIntersection.y - minIntersection.y + 1);
 
-        String[] result = getResult(arr);
+        char[][] rectangle = makeStars(makeRectangle(width, height), intersections, minIntersection, maxIntersection);
 
-        return result;
+        String[] answer = new String[rectangle.length];
+        for (int i = 0; i < answer.length; i++) {
+            answer[i] = new String(rectangle[i]);
+        }
+
+        return answer;
     }
 
-    private List<Point> getPoints(int[][] line) {
-        List<Point> points = new ArrayList<>();
-        // 1. 모든 직선 쌍에 대해 반복
-        for (int i = 0; i < line.length; i++) {
-            for (int j = i + 1; j < line.length; j++) {
-                // A. 교점 좌표 구하기
-                Point intersection = intersection(line[i][0], line[i][1], line[i][2], line[j][0], line[j][1], line[j][2]);
+    private char[][] makeStars(char[][] rectangle, Set<Point> intersections, Point minIntersection, Point maxIntersection) {
+        for (Point intersection : intersections) {
+            int x = (int) (intersection.x - minIntersection.x);
+            int y = (int) (maxIntersection.y - intersection.y);
 
-                // B. 정수 좌표만 저장하기
+            rectangle[y][x] = '*';
+        }
+
+        return rectangle;
+    }
+
+    private Set<Point> getIntersections(int[][] line) {
+        Set<Point> intersections = new HashSet<>();
+
+        for (int cur = 0; cur < line.length; cur++) {
+            for (int next = cur + 1; next < line.length; next++) {
+                Point intersection = getIntersection(line[cur][0], line[cur][1], line[cur][2], line[next][0], line[next][1], line[next][2]);
+
                 if (intersection == null) continue;
-                points.add(intersection);
+
+                intersections.add(intersection);
             }
         }
-        return points;
+
+        return intersections;
     }
 
-    private Point intersection(long a1, long b1, long c1, long a2, long b2, long c2) {
-        // 교점 구해서 반환하기
-        double x = (double) ((b1 * c2) - (b2 * c1)) / ((a1 * b2) - (b1 * a2));
-        double y = (double) ((a2 * c1) - (a1 * c2)) / ((a1 * b2) - (b1 * a2));
+    private Point getIntersection(long a, long b, long e, long c, long d, long f) {
+        double x = (double) (b * f - e * d) / (a * d - b * c);
+        double y = (double) (e * c - a * f) / (a * d - b * c);
 
-        // 정수일 때만 반환하기
-        if (x%1 != 0 || y%1 != 0) return null;
+        if ((x % 1 != 0) || (y % 1 != 0)) return null;
 
         return new Point((long) x, (long) y);
     }
 
-    private Point getMaximumPoint(List<Point> points) {
+    private Point getMaxIntersection(Set<Point> intersections) {
         long maxX = Long.MIN_VALUE;
         long maxY = Long.MIN_VALUE;
 
-        for (Point p : points) {
-            if (p.x > maxX) maxX = p.x;
-            if (p.y > maxY) maxY = p.y;
+        for (Point intersection : intersections) {
+            if (intersection.x > maxX) maxX = intersection.x;
+            if (intersection.y > maxY) maxY = intersection.y;
         }
 
         return new Point(maxX, maxY);
     }
 
-    private Point getMinimumPoint(List<Point> points) {
+    private Point getMinIntersection(Set<Point> intersections) {
         long minX = Long.MAX_VALUE;
         long minY = Long.MAX_VALUE;
 
-        for (Point p : points) {
-            if (p.x < minX) minX = p.x;
-            if (p.y < minY) minY = p.y;
+        for (Point intersection : intersections) {
+            if (intersection.x < minX) minX = intersection.x;
+            if (intersection.y < minY) minY = intersection.y;
         }
 
         return new Point(minX, minY);
     }
 
-    private char[][] getArr(Point minimumPoint, Point maximumPoint) {
-        // 3. 구한 최대, 최소값을 이용하여 2차원 배열의 크기 결정
-        int width = (int) (maximumPoint.x - minimumPoint.x + 1);
-        int height = (int) (maximumPoint.y - minimumPoint.y + 1);
 
+    private char[][] makeRectangle(int width, int height) {
         char[][] arr = new char[height][width];
+
         for (char[] row : arr) {
             Arrays.fill(row, '.');
         }
+
         return arr;
     }
 
-    private void makeStars(List<Point> points, Point minimumPoint, Point maximumPoint, char[][] arr) {
-        // 4. 2차원 배열에 * 표시
-        for (Point p : points) {
-            int x = (int) (p.x - minimumPoint.x);
-            int y = (int) (maximumPoint.y - p.y);
-
-            arr[y][x] = '*';
-        }
-    }
-    private String[] getResult(char[][] arr) {
-        // 5. 문자열 배열로 변환 후 반환
-        int i = 0;
-        String[] result = new String[arr.length];
-        for (char[] chars : arr) {
-            result[i] = new String(chars);
-            i++;
-        }
-        return result;
-    }
 }
