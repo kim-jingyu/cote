@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class CaesarCipherTest {
-    CaesarCipher cc = new CaesarCipher();
+    CaesarCipherV1 cc = new CaesarCipherV1();
 
     @Test
     void test1() {
