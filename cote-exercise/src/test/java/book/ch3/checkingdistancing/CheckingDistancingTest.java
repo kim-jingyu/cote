@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class CheckingDistancingTest {
-    CheckingDistancing cd = new CheckingDistancing();
+    CheckingDistancingV1 cd = new CheckingDistancingV1();
 
     @Test
     void test1() {
