@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class MakeStrangeWordsTest {
-    MakeStrangeWords ms = new MakeStrangeWords();
+    MakeStrangeWordsV1 ms = new MakeStrangeWordsV1();
 
     @Test
     void test1() {
