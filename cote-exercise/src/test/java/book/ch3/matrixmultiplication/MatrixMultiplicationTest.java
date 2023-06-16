@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class MatrixMultiplicationTest {
-    MatrixMultiplication mm = new MatrixMultiplication();
+    MatrixMultiplicationV1 mm = new MatrixMultiplicationV1();
 
     @Test
     void test1() {
