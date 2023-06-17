@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class FlipTernaryNotationTest {
-    FlipTernaryNotation fn = new FlipTernaryNotation();
+    FlipTernaryNotation fn = new FlipTernaryNotationV1();
 
     @Test
     void test1() {
