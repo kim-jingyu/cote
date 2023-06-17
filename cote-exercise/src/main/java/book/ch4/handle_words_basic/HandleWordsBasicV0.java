@@ -1,6 +1,4 @@
-package book.ch4.repeatbinaryconversion;
-
-import book.ch4.HandleWordsBasic;
+package book.ch4.handle_words_basic;
 
 public class HandleWordsBasicV0 implements HandleWordsBasic {
     @Override

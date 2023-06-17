@@ -1,6 +1,7 @@
 package book.ch4;
 
-import book.ch4.repeatbinaryconversion.HandleWordsBasicV0;
+import book.ch4.handle_words_basic.HandleWordsBasic;
+import book.ch4.handle_words_basic.HandleWordsBasicV0;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
