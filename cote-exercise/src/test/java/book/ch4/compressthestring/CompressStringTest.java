@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class CompressStringTest {
-    CompressString cs = new CompressString();
+    CompressString cs = new CompressStringV1();
 
     @Test
     void test1() {
