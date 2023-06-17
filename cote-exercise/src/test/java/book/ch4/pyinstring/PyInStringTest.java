@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class PyInStringTest {
-    PyInString py = new PyInString();
+    PyInStringV1 py = new PyInStringV1();
 
     @Test
     void test1() {
