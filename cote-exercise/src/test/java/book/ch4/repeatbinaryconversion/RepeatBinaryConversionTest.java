@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class RepeatBinaryConversionTest {
-    RepeatBinaryConversion rc = new RepeatBinaryConversion();
+    RepeatBinaryConversionV1 rc = new RepeatBinaryConversionV1();
 
     @Test
     void test1() {
