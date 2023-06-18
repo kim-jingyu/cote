@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class VowelDictionaryTest {
-    VowelDictionary vd = new VowelDictionary();
+    VowelDictionary vd = new VowelDictionaryV1();
 
     @Test
     void test1() {
