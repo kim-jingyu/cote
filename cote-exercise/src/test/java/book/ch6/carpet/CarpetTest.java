@@ -1,12 +1,11 @@
 package book.ch6.carpet;
 
-import book.ch6.carpet.Carpet;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
 class CarpetTest {
-    Carpet carpet = new Carpet();
+    Carpet carpet = new CarpetV1();
 
     @Test
     void test1() {
