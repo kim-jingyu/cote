@@ -1,12 +1,11 @@
 package book.ch6.mock_test;
 
-import book.ch6.mock_test.MockTest;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
 class MockTestTest {
-    MockTest mt = new MockTest();
+    MockTest mt = new MockTestV1();
 
     @Test
     void test1() {
