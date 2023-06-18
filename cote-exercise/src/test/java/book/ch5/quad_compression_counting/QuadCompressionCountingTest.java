@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class QuadCompressionCountingTest {
-    QuadCompressionCounting qc = new QuadCompressionCountingV1();
+    QuadCompressionCounting qc = new QuadCompressionCountingV2();
 
     @Test
     void test1() {
