@@ -1,49 +1,34 @@
 package book.ch6.bad_user;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class BadUserV0 implements BadUser{
     @Override
     public int solution(String[] user_id, String[] banned_id) {
-        Set<List<String>> block_ids = new HashSet<>();
-        calculate(user_id, banned_id, new ArrayList<>(), block_ids, new boolean[user_id.length]);
+        String[][] bans = Arrays.stream(banned_id)
+                .map(banned -> banned.replace('*', '.'))
+                .map(banned -> Arrays.stream(user_id)
+                        .filter(id -> id.matches(banned))
+                        .toArray(String[]::new))
+                .toArray(String[][]::new);
 
-        return 0;
+        Set<Set<String>> banSet = new HashSet<>();
+        count(0, new HashSet<>(), bans, banSet);
+
+        return banSet.size();
     }
 
-    private void calculate(String[] user_id, String[] banned_id, List<String> blockUsers, Set<List<String>> block_ids, boolean[] isVisited) {
-        if (blockUsers.size() == 5) {
-            block_ids.add(blockUsers);
-            for (String blockUser : blockUsers) {
-                System.out.print(blockUser + " ");
-            }
+    private void count(int index, Set<String> banned, String[][] bans, Set<Set<String>> banSet) {
+        if (index == bans.length) {
+            banSet.add(new HashSet<>(banned));
             return;
         }
 
-        for (int user = 0; user < user_id.length; user++) {
-            if (isVisited[user]) continue;
-            for (int banned = 0; banned < banned_id.length; banned++) {
-                if (user_id[user].length() == banned_id[banned].length() && isMatch(user_id[user], banned_id[banned])) {
-                    isVisited[user] = true;
-                    blockUsers.add(user_id[user]);
-                    calculate(user_id, banned_id, blockUsers, block_ids, isVisited);
-                    isVisited[user] = false;
-                }
-            }
+        for (String id : bans[index]) {
+            if (banned.contains(id)) continue;
+            banned.add(id);
+            count(index + 1, banned, bans, banSet);
+            banned.remove(id);
         }
-    }
-
-    private boolean isMatch(String user, String banned) {
-        char[] userCharArray = user.toCharArray();
-        char[] bannedCharArray = banned.toCharArray();
-        for (int i = 0; i < banned.length(); i++) {
-            if (bannedCharArray[i] == '*' && userCharArray[i] == 'i') {
-                return true;
-            }
-        }
-        return false;
     }
 }
