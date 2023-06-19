@@ -1,12 +1,13 @@
 package cote.programmers;
 
 import book.ch6.find_prime.FindPrime;
+import book.ch6.find_prime.FindPrimeV1;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
 class FindPrimeNumberTest {
-    FindPrime findPrimeNumber = new FindPrime();
+    FindPrime findPrimeNumber = new FindPrimeV1();
 
     @Test
     void testcase1() {
