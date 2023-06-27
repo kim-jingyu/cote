@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class ArrangeStringDescendingTest {
-    ArrangeStringDescending asd = new ArrangeStringDescendingV0();
+    ArrangeStringDescending asd = new ArrangeStringDescendingV1();
 
     @Test
     void test1() {
