@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class MenuRenewalTest {
-    MenuRenewal menuRenewal = new MenuRenewalV0();
+    MenuRenewal menuRenewal = new MenuRenewalV1();
 
     @Test
     void test1() {
