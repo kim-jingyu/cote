@@ -1,67 +1,54 @@
 package cote.baekjoon.backtracking;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class NO14888 {
-    private static final int OPERATOR_LENGTH = 4;
-    private static int n,max=Integer.MIN_VALUE,min=Integer.MAX_VALUE;
-    private static int[] arr,operator;
+    private static int[] numbers, operators;
+    private static int n;
+    private static List<Integer> results = new ArrayList<>();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        n = Integer.parseInt(br.readLine());
 
-    public static void solution(int Level,int sum){
-        if(Level==n-1){
-            max = Math.max(max,sum);
-            min = Math.min(min,sum);
+        numbers = Arrays.stream(br.readLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+
+        operators = Arrays.stream(br.readLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+
+        calculate(1, numbers[0]);
+
+        Collections.sort(results);
+
+        System.out.println(results.get(results.size() - 1));
+        System.out.println(results.get(0));
+    }
+
+    private static void calculate(int level, int number) {
+        if (level == n) {
+            results.add(number);
+            return;
         }
-        else{
-            for(int i=0;i<OPERATOR_LENGTH;i++){
-                if(operator[i]>0){
-                    operator[i]--;
 
-                    switch(i){
-                        case(0):
-                            solution(Level+1,sum + arr[Level+1]);
-                            break;
-                        case(1):
-                            solution(Level+1,sum - arr[Level+1]);
-                            break;
-                        case(2):
-                            solution(Level+1,sum * arr[Level+1]);
-                            break;
-                        case(3):
-                            solution(Level+1,sum / arr[Level+1]);
-                            break;
-                    }
-
-                    operator[i]++;
+        for (int i = 0; i < 4; i++) {
+            if (operators[i] > 0) {
+                operators[i]--;
+                switch (i) {
+                    case 0 -> calculate(level + 1, number + numbers[level]);
+                    case 1 -> calculate(level + 1, number - numbers[level]);
+                    case 2 -> calculate(level + 1, number * numbers[level]);
+                    case 3 -> calculate(level + 1, number / numbers[level]);
                 }
+                operators[i]++;
             }
         }
     }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-
-        arr = new int[n];
-        for(int i=0;i<n;i++){
-            arr[i] = sc.nextInt();
-        }
-
-        operator = new int[OPERATOR_LENGTH];
-        for(int i=0;i<OPERATOR_LENGTH;i++){
-            operator[i] = sc.nextInt();
-        }
-
-        solution(0,arr[0]);
-
-        System.out.println(max);
-        System.out.println(min);
-    }
 }
-
-//6
-//        1 2 3 4 5 6
-//        2 1 1 1
-//
-//        54
-//        -24
