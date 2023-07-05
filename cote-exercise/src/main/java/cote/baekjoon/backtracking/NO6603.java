@@ -1,42 +1,48 @@
 package cote.baekjoon.backtracking;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class NO6603 {
-    private static final int LOTTO_SIZE = 6;
-    private static String[] input;
-    private static int n;
-    private static int[] arr,tmp;
-
-    public static void solution(int Level,int start){
-        if(Level==LOTTO_SIZE){
-            for(int i:tmp) System.out.print(i+" ");
-            System.out.println();
-        }
-        else{
-            for(int i=start;i<n;i++){
-                tmp[Level] = arr[i];
-                solution(Level+1,i+1);
-            }
-        }
-    }
-
+    private static int[] arr;
+    private static boolean[] isVisited;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        while(true){
-            input = sc.nextLine().split(" ");
-            n = Integer.valueOf(input[0]);
-            if(n == 0) break;
+        while (true) {
+            int k = sc.nextInt();
+            if (k == 0) break;
 
-            arr = new int[n];
-            for(int i=0;i<n;i++){
-                arr[i] = Integer.valueOf(input[i+1]);
+            arr = new int[k];
+            isVisited = new boolean[k];
+
+            for (int i = 0; i < k; i++) {
+                arr[i] = sc.nextInt();
             }
-            tmp = new int[LOTTO_SIZE];
 
-            solution(0,0);
+            calculate(0, k, 0);
+
             System.out.println();
+        }
+    }
+
+    private static void calculate(int level, int k, int current) {
+        if (level == 6) {
+            for (int i = 0; i < k; i++) {
+                if (isVisited[i]) System.out.print(arr[i] + " ");
+            }
+            System.out.println();
+            return;
+        }
+
+        for (int i = current; i < k; i++) {
+            if (isVisited[i]) continue;
+
+            isVisited[i] = true;
+            calculate(level + 1, k, i+1);
+            isVisited[i] = false;
         }
     }
 }
