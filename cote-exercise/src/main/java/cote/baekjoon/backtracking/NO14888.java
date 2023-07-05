@@ -1,54 +1,56 @@
 package cote.baekjoon.backtracking;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.Scanner;
 
 public class NO14888 {
-    private static int[] numbers, operators;
-    private static int n;
-    private static List<Integer> results = new ArrayList<>();
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        n = Integer.parseInt(br.readLine());
+    private static int n, min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+    private static int[] arr, operators;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
 
-        numbers = Arrays.stream(br.readLine().split(" "))
-                .mapToInt(Integer::parseInt)
-                .toArray();
+        arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
 
-        operators = Arrays.stream(br.readLine().split(" "))
-                .mapToInt(Integer::parseInt)
-                .toArray();
+        operators = new int[4];
+        for (int i = 0; i < 4; i++) {
+            operators[i] = sc.nextInt();
+        }
 
-        calculate(1, numbers[0]);
+        calculate(1, arr[0]);
 
-        Collections.sort(results);
-
-        System.out.println(results.get(results.size() - 1));
-        System.out.println(results.get(0));
+        System.out.println(max);
+        System.out.println(min);
     }
 
-    private static void calculate(int level, int number) {
+    private static void calculate(int level, int sum) {
         if (level == n) {
-            results.add(number);
+            max = Math.max(max, sum);
+            min = Math.min(min, sum);
             return;
         }
 
         for (int i = 0; i < 4; i++) {
-            if (operators[i] > 0) {
-                operators[i]--;
-                switch (i) {
-                    case 0 -> calculate(level + 1, number + numbers[level]);
-                    case 1 -> calculate(level + 1, number - numbers[level]);
-                    case 2 -> calculate(level + 1, number * numbers[level]);
-                    case 3 -> calculate(level + 1, number / numbers[level]);
-                }
-                operators[i]++;
+            if (operators[i] == 0) continue;
+
+            operators[i]--;
+            switch (i) {
+                case 0:
+                    calculate(level + 1, sum + arr[level]);
+                    break;
+                case 1:
+                    calculate(level + 1, sum - arr[level]);
+                    break;
+                case 2:
+                    calculate(level + 1, sum * arr[level]);
+                    break;
+                case 3:
+                    calculate(level + 1, sum / arr[level]);
+                    break;
             }
+            operators[i]++;
         }
     }
 }
