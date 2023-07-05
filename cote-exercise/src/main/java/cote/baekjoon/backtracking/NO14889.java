@@ -43,8 +43,9 @@ class NO14889 {
         int stark = 0;
         int link = 0;
         for (int i = 0; i < n - 1; i++) {
-            for (int j = i; j < n; j++) {
+            for (int j = i + 1; j < n; j++) {
                 if (isVisited[i] && isVisited[j]) {
+                    System.out.print(i + " " + j +",");
                     stark += map[i][j];
                     stark += map[j][i];
                 } else if (!isVisited[i] && !isVisited[j]) {
@@ -53,6 +54,7 @@ class NO14889 {
                 }
             }
         }
+        System.out.println(" -> " + stark + " " + link);
         answer = Math.min(answer, Math.abs(stark - link));
     }
 }
