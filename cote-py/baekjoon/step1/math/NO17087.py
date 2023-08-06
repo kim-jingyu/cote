@@ -1,27 +1,14 @@
-from math import gcd
-from itertools import combinations
+def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a % b)
 
 
-def main():
-    N, S = map(int, input().split())
-    people = list(map(int, input().split()))
-    s = set()
-    answer = (10 ** 9)
+N, S = map(int, input().split())
+people = list(map(int, input().split()))
+answer = abs(people[0] - S)
 
-    for person in people:
-        s.add(abs(S - person))
+for value in people[1:]:
+    answer = gcd(abs(value - S), answer)
 
-    if N == 1:
-        print(s.pop())
-        return
-
-    combs = combinations(s, 2)
-
-    for a, b in combs:
-        answer = min(answer, gcd(a, b))
-
-    print(answer)
-
-
-if __name__ == '__main__':
-    main()
+print(answer)
