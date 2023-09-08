@@ -6,10 +6,9 @@ public class KiwiJuiceEasy {
             int f = fromId[i];
             int t = toId[i];
 
-            int amountOfMovement = Math.min(bottles[f], capacities[t] - bottles[t]);
-
-            bottles[t] += amountOfMovement;
-            bottles[f] -= amountOfMovement;
+            int total = bottles[f] + bottles[t];
+            bottles[t] = Math.min(total, capacities[t]);
+            bottles[f] = total - bottles[t];
         }
         return bottles;
     }
