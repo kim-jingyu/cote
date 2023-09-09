@@ -1,27 +1,25 @@
 package cote.topcoder;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class InterestingParty {
     public int bestInvitation(String[] first, String[] second) {
+        Map<String, Integer> countPerInterest = new HashMap<>();
         int answer = 0;
 
         for (int i = 0; i < first.length; i++) {
-            String currentFirst = first[i];
-            String currentSecond = second[i];
+            countPerInterest.putIfAbsent(first[i], 0);
+            countPerInterest.putIfAbsent(second[i], 0);
+        }
 
-            int currentFirstCount = 0;
-            int currentSecondCount = 0;
+        for (int i = 0; i < first.length; i++) {
+            countPerInterest.put(first[i], countPerInterest.get(first[i]) + 1);
+            countPerInterest.put(second[i], countPerInterest.get(second[i]) + 1);
+        }
 
-            for (int j = 0; j < first.length; j++) {
-                if (currentFirst.equals(first[j])) currentFirstCount++;
-                if (currentFirst.equals(second[j])) currentFirstCount++;
-                if (currentSecond.equals(first[j])) currentSecondCount++;
-                if (currentSecond.equals(second[j])) currentSecondCount++;
-            }
-
-            answer = Math.max(answer, currentFirstCount);
-            answer = Math.max(answer, currentSecondCount);
+        for (Integer value : countPerInterest.values()) {
+            answer = Math.max(answer, value);
         }
 
         return answer;
