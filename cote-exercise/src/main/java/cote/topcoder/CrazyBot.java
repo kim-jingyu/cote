@@ -3,6 +3,7 @@ package cote.topcoder;
 public class CrazyBot {
     private int[] dx = {1, -1, 0, 0};
     private int[] dy = {0, 0, 1, -1};
+
     private boolean[][] isVisited = new boolean[100][100];
     private double[] probabilities = new double[4];
 
