@@ -16,6 +16,8 @@ public class ArraySortMain {
                     item1.getName().compareTo(item2.getName())
         );
 
+        System.out.println(items[3].getName().compareTo(items[2].getName()));
+
         for (Item item : items) {
             System.out.println("item = " + item);
         }
