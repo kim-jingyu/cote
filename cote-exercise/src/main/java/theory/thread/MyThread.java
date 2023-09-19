@@ -9,6 +9,8 @@ public class MyThread extends Thread {
 
     @Override
     public void run() {
+        String name = Thread.currentThread().getName();
+        System.out.println("Thread Name : " + name);
         for (int i = 0; i < 10; i++) {
             System.out.print(str);
             try {
