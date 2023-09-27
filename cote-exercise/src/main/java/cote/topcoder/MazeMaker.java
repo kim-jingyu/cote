@@ -46,7 +46,6 @@ public class MazeMaker {
                 }
                 answer = Math.max(answer, board[i][j]);
             }
-
         }
 
         return answer;
